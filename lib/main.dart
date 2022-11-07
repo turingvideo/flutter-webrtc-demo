@@ -1,6 +1,7 @@
 import 'dart:core';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_webrtc_demo/src/call_sample/player_smaple.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'src/call_sample/call_sample.dart';
@@ -133,6 +134,13 @@ class _MyAppState extends State<MyApp> {
           push: (BuildContext context) {
             _datachannel = true;
             _showAddressDialog(context);
+          }),
+      RouteItem(
+          title: 'Webrtc Player Sample',
+          subtitle: 'SRS',
+          push: (BuildContext context) {
+            Navigator.of(context)
+                .push(MaterialPageRoute(builder: (context) => PlayerSample()));
           }),
     ];
   }
