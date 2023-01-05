@@ -18,6 +18,8 @@ class PlayerSampleState extends State<PlayerSample> {
 
   String url = 'test';
 
+  bool isCodeH264 = true;
+
   @override
   void initState() {
     super.initState();
@@ -49,6 +51,42 @@ class PlayerSampleState extends State<PlayerSample> {
                 });
               },
             )),
+          ),
+          SizedBox(height: 20),
+          Row(
+            children: [
+              const Spacer(),
+              Checkbox(
+                  value: isCodeH264,
+                  onChanged: (v) {
+                    setState(() {
+                      isCodeH264 = v!;
+                    });
+                  }),
+              TextButton(
+                  onPressed: () {
+                    setState(() {
+                      isCodeH264 = true;
+                    });
+                  },
+                  child: Text('H264')),
+              const Spacer(),
+              Checkbox(
+                  value: !isCodeH264,
+                  onChanged: (v) {
+                    setState(() {
+                      isCodeH264 = !v!;
+                    });
+                  }),
+              TextButton(
+                  onPressed: () {
+                    setState(() {
+                      isCodeH264 = false;
+                    });
+                  },
+                  child: Text('H265')),
+              const Spacer(),
+            ],
           ),
           SizedBox(height: 20),
           ElevatedButton(

@@ -23,3 +23,5 @@ const webRTCConnectionError =
 extension StringExtension on String {
   bool get isValidUri => Uri.tryParse(this)?.hasAbsolutePath ?? false;
 }
+
+enum WebrtcCodeType { h264, h265 }

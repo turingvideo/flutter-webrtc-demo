@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter_webrtc/flutter_webrtc.dart' as webrtc;
+import 'package:flutter_webrtc_demo/src/player/webrtc_player_state.dart';
 
 class WebRTCPlayer {
   Function(webrtc.MediaStream stream)? _onRemoteStream;
@@ -28,7 +29,10 @@ class WebRTCPlayer {
 
   /// Start play a url.
   /// [url] must a path parsed by [WebRTCUri.parse] in https://github.com/rtcdn/rtcdn-draft
-  Future<void> play(String url) async {
+  Future<void> play(
+    String url, {
+    WebrtcCodeType code = WebrtcCodeType.h264,
+  }) async {
     try {
       await _pc?.close();
       _pc = null;
@@ -84,7 +88,8 @@ class WebRTCPlayer {
         'WebRTC: createOffer, ${offer.type} is ${offer.sdp?.replaceAll('\n', '\\n').replaceAll('\r', '\\r')}',
       );
 
-      webrtc.RTCSessionDescription? answer = await _handshake(url, offer.sdp);
+      webrtc.RTCSessionDescription? answer =
+          await _handshake(url, offer.sdp, code);
 
       print(
         'WebRTC: got answer ${answer?.type} is ${answer?.sdp?.replaceAll('\n', '\\n').replaceAll('\r', '\\r')}',
@@ -109,7 +114,10 @@ class WebRTCPlayer {
 
   /// Handshake to exchange SDP, send offer and got answer.
   Future<webrtc.RTCSessionDescription?> _handshake(
-      String url, String? offer) async {
+    String url,
+    String? offer,
+    WebrtcCodeType code,
+  ) async {
     // Setup the client for HTTP or HTTPS.
     HttpClient client = HttpClient();
 
@@ -130,8 +138,12 @@ class WebRTCPlayer {
       //    {code: 0, sdp: "answer", sessionid: "007r51l7:X2Lv"}
       HttpClientRequest req = await client.postUrl(Uri.parse(uri.api));
       req.headers.set('Content-Type', 'application/json');
-      req.add(utf8.encode(json
-          .encode({'api': uri.api, 'streamurl': uri.streamUrl, 'sdp': offer})));
+      req.add(utf8.encode(json.encode({
+        'api': uri.api,
+        'streamurl': uri.streamUrl,
+        'sdp': offer,
+        'code_type': code.name,
+      })));
       // info('WebRTC request: ${uri.api} offer=${offer?.length}B');
 
       HttpClientResponse res = await req.close();

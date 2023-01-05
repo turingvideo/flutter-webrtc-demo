@@ -63,7 +63,7 @@ packages:
       name: dart_webrtc
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.10"
+    version: "1.0.11"
   fake_async:
     dependency: transitive
     description:
@@ -104,11 +104,11 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: "t0.9.12"
-      resolved-ref: a1342c176be5385d70121a5066ecbe9c12b8c6e2
+      ref: "2058a1f77262461f039ee7c6645cdac19adff51e"
+      resolved-ref: "2058a1f77262461f039ee7c6645cdac19adff51e"
       url: "git@github.com:turingvideo/flutter-webrtc.git"
     source: git
-    version: "0.9.12"
+    version: "0.9.17"
   http:
     dependency: "direct main"
     description:
@@ -365,7 +365,7 @@ packages:
       name: webrtc_interface
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.9"
+    version: "1.0.10"
   win32:
     dependency: transitive
     description:

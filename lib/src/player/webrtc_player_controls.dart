@@ -25,11 +25,13 @@ typedef WebRTCPlayerPanelBuilder = Widget Function(
 class WebRTCPlayerControls extends StatefulWidget {
   final WebRTCPlayerController controller;
   final WebRTCPlayerPanelBuilder? panelBuilder;
+  final WebrtcCodeType code;
 
   const WebRTCPlayerControls({
     Key? key,
     required this.controller,
     this.panelBuilder,
+    this.code = WebrtcCodeType.h264,
   }) : super(key: key);
 
   @override
@@ -41,6 +43,7 @@ class _WebRTCPlayerControlsState extends State<WebRTCPlayerControls>
   final webrtc.RTCVideoRenderer _video = webrtc.RTCVideoRenderer();
   final WebRTCPlayer _player = WebRTCPlayer();
   final WebRTCPublisher _publisher = WebRTCPublisher();
+  late final WebrtcCodeType code;
 
   StateSetter? fullStateSetter;
 
@@ -50,6 +53,13 @@ class _WebRTCPlayerControlsState extends State<WebRTCPlayerControls>
   void initState() {
     super.initState();
     print("============== webrtc controls init state, id = $hashCode");
+    code = widget.code;
+  }
+
+  @override
+  void didUpdateWidget(covariant WebRTCPlayerControls oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (code != widget.code) code = widget.code;
   }
 
   @override
@@ -189,7 +199,7 @@ class _WebRTCPlayerControlsState extends State<WebRTCPlayerControls>
 
     // Auto start play WebRTC streaming.
     // info("============= webrtc player url = $url, hashcode = $hashCode");
-    await _player.play(url);
+    await _player.play(url, code: widget.code);
   }
 
   void twoWayAudio(String audioUrl) async {

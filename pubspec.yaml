@@ -14,7 +14,7 @@ dependencies:
   flutter_webrtc:
     git:
       url: git@github.com:turingvideo/flutter-webrtc.git
-      ref: t0.9.12
+      ref: 2058a1f77262461f039ee7c6645cdac19adff51e
   shared_preferences: ^2.0.7
   http: ^0.13.3
   path_provider: ^2.0.2
