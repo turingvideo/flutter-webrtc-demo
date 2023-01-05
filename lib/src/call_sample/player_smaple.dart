@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_webrtc_demo/src/player/webrtc_player_controller.dart';
+import 'package:flutter_webrtc_demo/src/player/webrtc_player_state.dart';
 
 import '../player/player_panel/player_live_view.dart';
 import '../player/player_panel/player_settings.dart';
@@ -101,6 +102,7 @@ class PlayerSampleState extends State<PlayerSample> {
             width: MediaQuery.of(context).size.width,
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: WebRTCPlayerControls(
+              code: isCodeH264 ? WebrtcCodeType.h264 : WebrtcCodeType.h265,
               controller: playerController,
               panelBuilder: (context, rect) {
                 return WebrtcPlayerPanel(

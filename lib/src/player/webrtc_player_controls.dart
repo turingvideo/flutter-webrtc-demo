@@ -43,7 +43,7 @@ class _WebRTCPlayerControlsState extends State<WebRTCPlayerControls>
   final webrtc.RTCVideoRenderer _video = webrtc.RTCVideoRenderer();
   final WebRTCPlayer _player = WebRTCPlayer();
   final WebRTCPublisher _publisher = WebRTCPublisher();
-  late final WebrtcCodeType code;
+  late WebrtcCodeType code;
 
   StateSetter? fullStateSetter;
 
@@ -60,6 +60,7 @@ class _WebRTCPlayerControlsState extends State<WebRTCPlayerControls>
   void didUpdateWidget(covariant WebRTCPlayerControls oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (code != widget.code) code = widget.code;
+    print('code = ${code.name}');
   }
 
   @override
