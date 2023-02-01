@@ -200,7 +200,8 @@ class _WebRTCPlayerControlsState extends State<WebRTCPlayerControls>
 
     // Auto start play WebRTC streaming.
     // info("============= webrtc player url = $url, hashcode = $hashCode");
-    await _player.play(url, code: widget.code);
+    final uri = '$url?codec=${widget.code.name}';
+    await _player.play(uri);
   }
 
   void twoWayAudio(String audioUrl) async {
