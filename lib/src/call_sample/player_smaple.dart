@@ -1,3 +1,4 @@
+import 'package:fijkplayer/fijkplayer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_webrtc_demo/src/player/webrtc_player_controller.dart';
 import 'package:flutter_webrtc_demo/src/player/webrtc_player_state.dart';
@@ -5,7 +6,6 @@ import 'package:flutter_webrtc_demo/src/player/webrtc_player_state.dart';
 import '../player/player_panel/player_live_view.dart';
 import '../player/player_panel/player_settings.dart';
 import '../player/player_panel/webrtc_player_panel.dart';
-import '../player/webrtc_error.dart';
 import '../player/webrtc_player_controls.dart';
 
 class PlayerSample extends StatefulWidget {
@@ -17,14 +17,31 @@ class PlayerSampleState extends State<PlayerSample> {
   WebRTCPlayerController playerController = WebRTCPlayerController();
   TextEditingController textEditingController = TextEditingController();
 
-  String url = 'test';
+  String url = 'webrtc';
 
   bool isCodeH264 = true;
+
+  FijkPlayer player = FijkPlayer();
+  String rtspUrl = 'rtsp';
+  TextEditingController rtspTextEditingController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
     textEditingController.text = url;
+    rtspTextEditingController.text = rtspUrl;
+
+    player.setOption(FijkOption.hostCategory, "enable-snapshot", 1);
+    player.setOption(FijkOption.playerCategory, "mediacodec-all-videos", 1);
+    startPlay();
+  }
+
+  void startPlay() async {
+    await player.setOption(FijkOption.hostCategory, "request-screen-on", 1);
+    await player.setOption(FijkOption.hostCategory, "request-audio-focus", 1);
+    await player.setDataSource(rtspUrl, autoPlay: true).catchError((e) {
+      print("setDataSource error: $e");
+    });
   }
 
   @override
@@ -33,7 +50,7 @@ class PlayerSampleState extends State<PlayerSample> {
       appBar: AppBar(
         title: Text('Webrtc Player'),
       ),
-      body: Column(
+      body: ListView(
         children: [
           TextField(
             controller: textEditingController,
@@ -92,8 +109,9 @@ class PlayerSampleState extends State<PlayerSample> {
           SizedBox(height: 20),
           ElevatedButton(
               onPressed: () {
-                playerController.setDataSource(url: url);
+                if (url.isNotEmpty) playerController.setDataSource(url: url);
                 // playerController.setTuringError(WebrtcError.none);
+                if (rtspUrl.isNotEmpty) startPlay();
               },
               child: Text('Confirm')),
           SizedBox(height: 80),
@@ -113,6 +131,30 @@ class PlayerSampleState extends State<PlayerSample> {
                 );
               },
             ),
+          ),
+          const Divider(color: Colors.red),
+          TextField(
+            controller: rtspTextEditingController,
+            onChanged: (v) {
+              setState(() {
+                rtspUrl = v;
+              });
+            },
+            decoration: InputDecoration(
+              suffix: IconButton(
+                icon: Icon(Icons.clear),
+                onPressed: () {
+                  rtspTextEditingController.text = '';
+                  setState(() {
+                    rtspUrl = '';
+                  });
+                },
+              ),
+            ),
+          ),
+          AspectRatio(
+            aspectRatio: 16 / 9,
+            child: FijkView(player: player),
           ),
         ],
       ),
