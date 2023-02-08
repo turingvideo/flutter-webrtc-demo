@@ -63,7 +63,7 @@ packages:
       name: dart_webrtc
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.11"
+    version: "1.0.12"
   fake_async:
     dependency: transitive
     description:
@@ -111,11 +111,11 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: "2058a1f77262461f039ee7c6645cdac19adff51e"
-      resolved-ref: "2058a1f77262461f039ee7c6645cdac19adff51e"
+      ref: "362036132f1592105a808d21ece22b675ac4398f"
+      resolved-ref: "362036132f1592105a808d21ece22b675ac4398f"
       url: "git@github.com:turingvideo/flutter-webrtc.git"
     source: git
-    version: "0.9.17"
+    version: "0.9.18"
   http:
     dependency: "direct main"
     description:
@@ -228,6 +228,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.1.0"
+  platform_detect:
+    dependency: transitive
+    description:
+      name: platform_detect
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.7"
   plugin_platform_interface:
     dependency: transitive
     description:
@@ -242,6 +249,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.2.4"
+  pub_semver:
+    dependency: transitive
+    description:
+      name: pub_semver
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.1.3"
   rxdart:
     dependency: "direct main"
     description:

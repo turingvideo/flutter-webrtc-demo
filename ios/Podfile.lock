@@ -6,14 +6,14 @@ PODS:
   - Flutter (1.0.0)
   - flutter_webrtc (0.9.17):
     - Flutter
-    - Turing-WebRTC-SDK (= 104.5112.06.1)
+    - Turing-WebRTC-SDK (= 104.5112.06.3)
   - orientation (0.0.1):
     - Flutter
   - path_provider_ios (0.0.1):
     - Flutter
   - shared_preferences_ios (0.0.1):
     - Flutter
-  - Turing-WebRTC-SDK (104.5112.06.1)
+  - Turing-WebRTC-SDK (104.5112.06.3)
 
 DEPENDENCIES:
   - fijkplayer (from `.symlinks/plugins/fijkplayer/ios`)
@@ -46,11 +46,11 @@ SPEC CHECKSUMS:
   BIJKPlayer: 4c5d66e5cb99ae5bade6f22a4fcc031722a81c64
   fijkplayer: 5ecf78e80cb97eed64cc170b094a4f691d9b9691
   Flutter: 50d75fe2f02b26cc09d224853bb45737f8b3214a
-  flutter_webrtc: fc112c61cf3a66c976e10728617d44c714f57020
+  flutter_webrtc: 8a7ba86456eda3b0ed5a765452a26e9f5d34e61a
   orientation: 6c9203efe86ce4cff379756910f18b2d745628c3
   path_provider_ios: 14f3d2fd28c4fdb42f44e0f751d12861c43cee02
   shared_preferences_ios: 548a61f8053b9b8a49ac19c1ffbc8b92c50d68ad
-  Turing-WebRTC-SDK: cc4f8cba43a12a4d15e7091ceaf53647878369c1
+  Turing-WebRTC-SDK: 64d74e8045a9c8f7db6b8a30b5e3e1454ec5b36f
 
 PODFILE CHECKSUM: 5cceeac3d67681750bcd544472e061099cefaa6a
 
