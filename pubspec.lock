@@ -111,8 +111,8 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: "362036132f1592105a808d21ece22b675ac4398f"
-      resolved-ref: "362036132f1592105a808d21ece22b675ac4398f"
+      ref: "54ef6d5e63152261c037cf8bc0ed08147a788e16"
+      resolved-ref: "54ef6d5e63152261c037cf8bc0ed08147a788e16"
       url: "git@github.com:turingvideo/flutter-webrtc.git"
     source: git
     version: "0.9.18"
