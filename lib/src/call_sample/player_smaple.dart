@@ -133,24 +133,35 @@ class PlayerSampleState extends State<PlayerSample> {
             ),
           ),
           const Divider(color: Colors.red),
-          TextField(
-            controller: rtspTextEditingController,
-            onChanged: (v) {
-              setState(() {
-                rtspUrl = v;
-              });
-            },
-            decoration: InputDecoration(
-              suffix: IconButton(
-                icon: Icon(Icons.clear),
-                onPressed: () {
-                  rtspTextEditingController.text = '';
-                  setState(() {
-                    rtspUrl = '';
-                  });
-                },
+          Row(
+            children: [
+              Expanded(
+                child: TextField(
+                  controller: rtspTextEditingController,
+                  onChanged: (v) {
+                    setState(() {
+                      rtspUrl = v;
+                    });
+                  },
+                  decoration: InputDecoration(
+                    suffix: IconButton(
+                      icon: Icon(Icons.clear),
+                      onPressed: () {
+                        rtspTextEditingController.text = '';
+                        setState(() {
+                          rtspUrl = '';
+                        });
+                      },
+                    ),
+                  ),
+                ),
               ),
-            ),
+              TextButton(
+                  onPressed: () {
+                    startPlay();
+                  },
+                  child: Text('Play')),
+            ],
           ),
           AspectRatio(
             aspectRatio: 16 / 9,

@@ -3,7 +3,6 @@ import 'dart:math';
 
 import 'package:after_layout/after_layout.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_webrtc/flutter_webrtc.dart' as webrtc;
 import 'package:flutter_webrtc_demo/src/player/player_panel/player_state.dart';
 import 'package:flutter_webrtc_demo/src/player/webrtc_error.dart';
@@ -14,7 +13,6 @@ import 'package:flutter_webrtc_demo/src/player/webrtc_player_state.dart';
 import 'package:flutter_webrtc_demo/src/player/webrtc_player_value.dart';
 
 import '../utils/hit_test_blocker.dart';
-import '../utils/orientation_helper.dart';
 import '../utils/screen_helper.dart';
 
 typedef WebRTCPlayerPanelBuilder = Widget Function(
@@ -118,9 +116,7 @@ class _WebRTCPlayerControlsState extends State<WebRTCPlayerControls>
         if (value.hd) widget.controller.setHdOff();
         break;
       case WebRTCPlayerValueState.fullScreen:
-        value.fullScreen
-            ? _pushFullScreenWidget(context)
-            : Navigator.of(context).pop();
+        Navigator.of(context).pop();
         break;
       default:
         break;
@@ -255,31 +251,31 @@ class _WebRTCPlayerControlsState extends State<WebRTCPlayerControls>
     return _defaultRoutePageBuilder(context, animation);
   }
 
-  Future<dynamic> _pushFullScreenWidget(BuildContext context) async {
-    final TransitionRoute<void> route = PageRouteBuilder<void>(
-      settings: const RouteSettings(),
-      pageBuilder: _fullScreenRoutePageBuilder,
-    );
-
-    await SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
-        overlays: []);
-    await OrientationHelper.setPreferredOrientations(
-        [DeviceOrientation.landscapeRight]);
-
-    var orientation = MediaQuery.of(context).orientation;
-    print("start enter fullscreen. orientation:$orientation");
-    OrientationHelper.forceOrientation(DeviceOrientation.landscapeRight);
-    print("screen orientation changed");
-
-    await Navigator.of(context).push(route);
-    print("=============== exist full screen");
-    fullStateSetter = null;
-    await SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
-        overlays: [SystemUiOverlay.top, SystemUiOverlay.bottom]);
-    await OrientationHelper.setPreferredOrientations(
-        [DeviceOrientation.portraitUp]);
-    OrientationHelper.forceOrientation(DeviceOrientation.portraitUp);
-  }
+  // Future<dynamic> _pushFullScreenWidget(BuildContext context) async {
+  //   final TransitionRoute<void> route = PageRouteBuilder<void>(
+  //     settings: const RouteSettings(),
+  //     pageBuilder: _fullScreenRoutePageBuilder,
+  //   );
+  //
+  //   await SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+  //       overlays: []);
+  //   await OrientationHelper.setPreferredOrientations(
+  //       [DeviceOrientation.landscapeRight]);
+  //
+  //   var orientation = MediaQuery.of(context).orientation;
+  //   print("start enter fullscreen. orientation:$orientation");
+  //   OrientationHelper.forceOrientation(DeviceOrientation.landscapeRight);
+  //   print("screen orientation changed");
+  //
+  //   await Navigator.of(context).push(route);
+  //   print("=============== exist full screen");
+  //   fullStateSetter = null;
+  //   await SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+  //       overlays: [SystemUiOverlay.top, SystemUiOverlay.bottom]);
+  //   await OrientationHelper.setPreferredOrientations(
+  //       [DeviceOrientation.portraitUp]);
+  //   OrientationHelper.forceOrientation(DeviceOrientation.portraitUp);
+  // }
 
   /// calculate size
 

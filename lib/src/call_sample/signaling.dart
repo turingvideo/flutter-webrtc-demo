@@ -1,16 +1,16 @@
-import 'dart:convert';
 import 'dart:async';
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_webrtc/flutter_webrtc.dart';
 
-import '../utils/screen_select_dialog.dart';
-import 'random_string.dart';
-
 import '../utils/device_info.dart'
     if (dart.library.js) '../utils/device_info_web.dart';
+import '../utils/screen_select_dialog.dart';
+import '../utils/turn.dart' if (dart.library.js) '../utils/turn_web.dart';
 import '../utils/websocket.dart'
     if (dart.library.js) '../utils/websocket_web.dart';
-import '../utils/turn.dart' if (dart.library.js) '../utils/turn_web.dart';
+import 'random_string.dart';
 
 enum SignalingState {
   ConnectionOpen,
@@ -33,6 +33,7 @@ enum VideoSource {
 
 class Session {
   Session({required this.sid, required this.pid});
+
   String pid;
   String sid;
   RTCPeerConnection? pc;
@@ -507,7 +508,7 @@ class Signaling {
   }
 
   Future<void> _createDataChannel(Session session,
-      {label: 'fileTransfer'}) async {
+      {label = 'fileTransfer'}) async {
     RTCDataChannelInit dataChannelDict = RTCDataChannelInit()
       ..maxRetransmits = 30;
     RTCDataChannel channel =
